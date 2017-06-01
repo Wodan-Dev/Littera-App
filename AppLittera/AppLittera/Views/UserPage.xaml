@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppLittera.Views.UserPage"
+             Title="Informações">
+    <StackLayout>
+        <Image Aspect="AspectFit" HorizontalOptions="Center"
+               Margin="0, 20, 0, 0"
+               Source="{Binding ProfilePic}"/>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+            <Image x:Name="imgUser" 
+                   Source="user.png" 
+                   Margin="10, 15, 0, 0" 
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <Label x:Name="lblName"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="#212121"
+                   Text="{Binding Name}"
+                   Margin="2, 10, 20, 0"/>
+
+        </StackLayout>
+
+        <Label x:Name="lblUserName"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               TextColor="#212121"
+               Text="{Binding Username}"
+               Margin="0, 0, 0, 0"/>
+        
+        <Button x:Name="btnSair" 
+                Text="Sair" 
+                Command="{Binding BtnSairClickCommand}" 
+                Margin="0, 10, 0, 0"
+                HorizontalOptions="Center"/>
+
+        <ActivityIndicator
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}"
+                Color="Black" 
+        />
+        
+    </StackLayout>
+</ContentPage>

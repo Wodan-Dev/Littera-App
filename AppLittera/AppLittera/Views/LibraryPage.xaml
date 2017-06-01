@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppLittera.Views.LibraryPage"
+             Title="Biblioteca">
+
+    <StackLayout>
+    
+        <ProgressBar x:Name="barDownload"/>
+
+        <ListView ItemsSource="{Binding Books}"
+                  ItemTapped="ListView_ItemTapped"
+                  ItemSelected="ListView_ItemSelected"
+                  IsPullToRefreshEnabled="True"
+                  CachingStrategy="RecycleElement"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  RefreshCommand="{Binding RefreshDataCommand}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Title}" TextColor="#00a380"
+                                Detail="{Binding Subtitle}" DetailColor="#212121" />
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </StackLayout>
+</ContentPage>

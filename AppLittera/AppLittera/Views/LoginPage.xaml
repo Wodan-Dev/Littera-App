@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppLittera.Views.LoginPage"
+             BackgroundColor="White">
+    <StackLayout>
+
+        <Image x:Name="imgLogo" Source="littera.jpg" />
+
+        <StackLayout Orientation="Horizontal">
+
+            <Image x:Name="imgUser" 
+                   Source="user.png" 
+                   Margin="10, 15, 0, 0" 
+                   VerticalOptions="Center" />
+
+            <Entry x:Name="txtUser" 
+                   Placeholder="E-mail ou usuário" 
+                   VerticalOptions="Center" 
+                   Text="{Binding Username}" 
+                   Margin="2, 10, 20, 0" 
+                   HorizontalOptions="FillAndExpand"/>
+
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+
+            <Image x:Name="imgPassword" 
+                   Source="password.png" 
+                   Margin="10, 15, 0, 0" 
+                   VerticalOptions="Center"/>
+
+            <Entry x:Name="txtPassword" 
+                   Placeholder="Senha" 
+                   Text="{Binding Password}" 
+                   IsPassword="True" 
+                   Margin="2, 10, 20, 0" 
+                   HorizontalOptions="FillAndExpand"/>
+
+        </StackLayout>
+
+        <Button x:Name="btnEnter" 
+                Text="Entrar" 
+                Command="{Binding BtnClickCommand}" 
+                HorizontalOptions="Center"/>
+
+        <ActivityIndicator
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"
+            Color="Black" />
+
+    </StackLayout>
+</ContentPage>
