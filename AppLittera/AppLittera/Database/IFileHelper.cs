@@ -11,12 +11,14 @@ namespace AppLittera.Database
     {
         String GetLocalFilePath(String fileName);
 
-        void WriteAllBytes(string filename, byte[] bytes/*, Action completed*/);
+        void WriteAllBytes(string fileName, byte[] bytes/*, Action completed*/);
 
-        Boolean DownloadFile(string url, string filename);
+        Boolean DownloadFile(string url, string fileName);
 
         ImageSource GetImageFile(string fileName);
 
-        void OpenPdf(string filename);
+        void OpenPdf(string fileName);
+
+        Boolean FileExists(string fileName);
     }
 }

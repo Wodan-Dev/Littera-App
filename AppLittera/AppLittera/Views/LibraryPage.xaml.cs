@@ -24,20 +24,28 @@ namespace AppLittera.Views
             BindingContext = booksVM;
         }
 
-        private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
                 return;
 
-            await Task.Delay(100);
+            if (((Book)e.SelectedItem).Content != "")
+            {
+                String bookName = String.Format("book_{0}.epub", ((Book)e.SelectedItem).Id_api);
 
-            Boolean ret = DependencyService.Get<IFileHelper>().DownloadFile("http://www.axmag.com/download/pdfurl-guide.pdf",
-                                                                            //((Book)e.SelectedItem).Content
-                                                                            String.Format("book_{0}.epub", ((Book)e.SelectedItem).Id_api));
+                if (!DependencyService.Get<IFileHelper>().FileExists(bookName))
+                {
+                    if (!DependencyService.Get<IFileHelper>().DownloadFile(((Book)e.SelectedItem).Content, bookName))
+                    {
+                        DependencyService.Get<IMessage>().ShowShortMessage("Não foi encontrado o livro escolhido.");
+                        return;
+                    }
+                }
 
-            DependencyService.Get<IFileHelper>().OpenPdf(String.Format("book_{0}.epub", ((Book)e.SelectedItem).Id_api));
-
-            //EpubBook epub = EpubReader.ReadBook(DependencyService.Get<IFileHelper>().GetLocalFilePath(String.Format("book_{0}.epub", ((Book)e.SelectedItem).Id_api)));
+                App.Current.MainPage = new ReadingPage(DependencyService.Get<IFileHelper>().GetLocalFilePath(bookName));
+            }
+            else
+                DependencyService.Get<IMessage>().ShowShortMessage("O arquivo deste livro ainda não está disponível.");
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;

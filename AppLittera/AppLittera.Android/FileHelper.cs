@@ -30,9 +30,9 @@ namespace AppLittera.Droid
                 completed();*/
         }
         
-        public bool DownloadFile(string url, string filename)
+        public bool DownloadFile(string url, string fileName)
         {
-            string path = GetLocalFilePath(filename);
+            string path = GetLocalFilePath(fileName);
             Boolean retorno = true;
 
             using (WebClient client = new WebClient())
@@ -55,9 +55,9 @@ namespace AppLittera.Droid
             return ImageSource.FromFile(GetLocalFilePath(fileName));
         }
 
-        public void OpenPdf(string filename)
+        public void OpenPdf(string fileName)
         {
-            Android.Net.Uri uri = Android.Net.Uri.Parse(GetLocalFilePath(filename));
+            Android.Net.Uri uri = Android.Net.Uri.Parse(GetLocalFilePath(fileName));
             Intent intent = new Intent(Intent.ActionView);
             intent.SetDataAndType(uri, "application/pdf");
             intent.SetFlags(ActivityFlags.ClearWhenTaskReset | ActivityFlags.NewTask);
@@ -71,6 +71,11 @@ namespace AppLittera.Droid
                 App.Current.MainPage.DisplayAlert("No APP", "SEM PDF", "ok");
                 //Toast.MakeText(Xamarin.Forms.Forms.Context, "No Application Available to View PDF", ToastLength.Short).Show();
             }
+        }
+
+        public Boolean FileExists(string fileName)
+        {
+            return File.Exists(GetLocalFilePath(fileName));
         }
     }
 }
