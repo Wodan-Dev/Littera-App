@@ -20,6 +20,7 @@ namespace AppLittera
 
         public readonly static String BOOK = BASE + "books/{0}";
 
-        public readonly static String USER = BASE + "users/{0}";
+        //public readonly static String USER = BASE + "users/{0}";
+        public readonly static String USER = BASE + "mordor/me";
     }
 }

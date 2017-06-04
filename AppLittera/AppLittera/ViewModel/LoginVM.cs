@@ -42,16 +42,16 @@ namespace AppLittera.ViewModel
             }
         }
 
-        public String email;
-        public String Email
-        {
-            get { return email; }
-            set
-            {
-                email = value;
-                OnPropertyChanged();
-            }
-        }
+        //public String email;
+        //public String Email
+        //{
+        //    get { return email; }
+        //    set
+        //    {
+        //        email = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         public String password;
         public String Password
@@ -71,18 +71,18 @@ namespace AppLittera.ViewModel
 
         private async void BtnEnterClick()
         {
-            if (String.IsNullOrEmpty(username) && String.IsNullOrEmpty(email))
-                await App.Current.MainPage.DisplayAlert("Acesso", "Informe o usuário ou e-mail.", "Ok");
+            if (String.IsNullOrEmpty(username)/* && String.IsNullOrEmpty(email)*/)
+                DependencyService.Get<IMessage>().ShowShortMessage("Informe o usuário ou e-mail.");
             else if (String.IsNullOrEmpty(password))
-                await App.Current.MainPage.DisplayAlert("Acesso", "Informe o senha.", "Ok");
+                DependencyService.Get<IMessage>().ShowShortMessage("Informe a senha.");
             else
             {
                 IsBusy = true;
 
                 Credentials credentials = new Credentials()
                 {
-                    Username = username,
-                    Email = email,
+                    Username = username.IndexOf("@") >= 0 ? "" : username,
+                    Email = username.IndexOf("@") >= 0 ? username : "",
                     Password = password
                 };
 
@@ -95,7 +95,8 @@ namespace AppLittera.ViewModel
                     {
                         App.User = new User()
                         {
-                            Username = username
+                            Username = username,
+                            Token = token
                         };
 
                         // Busca os dados do usuário
